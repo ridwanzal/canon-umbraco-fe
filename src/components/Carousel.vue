@@ -63,7 +63,7 @@
           </button>
           <ul
             v-if="openCountry"
-            class="absolute left-0 w-full bg-white border border-[#ddd] mt-1 shadow-sm z-10"
+            class="absolute w-[80%] left-[10%] bg-white border border-[#ddd] mt-1 shadow-sm z-10"
           >
             <li
               v-for="option in countryOptions"
@@ -102,7 +102,7 @@
           </button>
           <ul
             v-if="openYear"
-            class="absolute left-0 w-full bg-white border border-[#ddd] mt-1 shadow-sm z-10"
+            class="absolute w-[80%] left-[10%] bg-white border border-[#ddd] mt-1 shadow-sm z-10"
           >
             <li
               v-for="option in yearOptions"
