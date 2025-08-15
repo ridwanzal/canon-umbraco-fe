@@ -6,7 +6,7 @@
       <!-- Filters mobile -->
       <div class="flex justify-center gap-4 mb-[48px] show-flex-mobile border-b border-black py-3">
         <div>
-          <h6 class="font-bold text-[#40464D]">Filter</h6>
+          <h6 class="font-bold text-[#40464D] flex items-center self-center h-full">Filter</h6>
         </div>
         <div class="ml-auto">
           <svg
