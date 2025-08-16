@@ -1,5 +1,7 @@
 # .
 
+Node version 20.xx or 22.xx
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
