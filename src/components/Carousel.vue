@@ -64,7 +64,7 @@
       <!-- End Filters desktop -->
 
       <!-- Carousel -->
-      <Swiper :modules="[Navigation, Pagination]" :slides-per-view="1.5" :space-between="16"
+      <Swiper ref="swiperRef" :modules="[Navigation, Pagination]" :slides-per-view="1.5" :space-between="16"
         :breakpoints="{ 1024: { slidesPerView: 3 } }" navigation :pagination="paginationOptions"
         class="pb-6 relative gallery--carousel">
         <SwiperSlide v-for="(car, index) in filteredCars" :key="index">
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, watch, nextTick } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
 import GalleryCard from "@/components/GalleryCard.vue";
@@ -92,14 +92,14 @@ import "swiper/css/pagination";
 import ModalFilter from "./ModalFilter.vue";
 
 export default {
-  components: { Swiper, SwiperSlide, GalleryCard, ModalFilter},
+  components: { Swiper, SwiperSlide, GalleryCard, ModalFilter },
   setup() {
     // dropdown state & options (kept as you already had)
     const openCountry = ref(false);
     const openYear = ref(false);
     const selectedCountry = ref("");
     const selectedYear = ref("");
-
+    const swiperRef = ref(null);
     const showModal = ref(false)
 
     const openModal = () => {
@@ -109,7 +109,6 @@ export default {
     const closeModal = () => {
       showModal.value = false
     }
-
 
     const countryOptions = ref([
       { value: "", label: "Country" },
@@ -208,6 +207,24 @@ export default {
         return `<span class="${className} segment"></span>`;
       },
     };
+
+    // when filteredCars changes, force update swiper
+    watch(filteredCars, async () => {
+      await nextTick();
+      if (swiperRef.value && swiperRef.value.swiper) {
+        swiperRef.value.swiper.update();
+      }
+    });
+
+    // when modal is opened, update swiper
+    watch(showModal, async (val) => {
+      if (val) {
+        await nextTick();
+        if (swiperRef.value && swiperRef.value.swiper) {
+          swiperRef.value.swiper.update();
+        }
+      }
+    });
 
     return {
       openCountry,
