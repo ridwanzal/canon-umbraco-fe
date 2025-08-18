@@ -80,7 +80,6 @@
   <!-- Modal -->
   <ModalFilter v-if="showModal" @close="closeModal" />
   <ModalAlbum v-if="showModalAlbum" @close="closeModalAlbum" />
-  <ModalViewer v-if="showModalViewer" @close="closeModalViewer" />
 </template>
 
 <script>

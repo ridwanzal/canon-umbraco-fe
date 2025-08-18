@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="grid grid-cols-4 gap-6 max-h-[600px] overflow-y-auto custom-scrollbar">
-          <div class="relative">
+          <div class="relative cursor-pointer" @click="openModalViewer">
             <img src="/images/1.png" alt="Image 1" class="w-full h-auto">
           </div>
           <div class="relative">
@@ -91,55 +91,70 @@
       </div>
     </div>
   </div>
+  <ModalViewer v-if="showModalViewer" @close="closeModalViewer" />
 </template>
 
 
 <script setup>
 import { ref } from 'vue'
+import ModalViewer from './ModalViewer.vue'
 
 const showModal = ref(true)
+const showModalViewer = ref(false)
 const openAccordion = ref(null)
 const selectedCountries = ref([])
 const selectedYears = ref([])
 
-const toggleAccordion = (section) => {
-  openAccordion.value = openAccordion.value === section ? null : section
-}
-
-const closeModal = () => {
+ const closeModal = () => {
   showModal.value = false
 }
+
+const openModalViewer = () => {
+  showModalViewer.value = true;
+};
+
+const closeModalViewer = () => {
+  showModalViewer.value = false;
+};
 
 const applyFilter = () => {
   console.log('Countries:', selectedCountries.value)
   console.log('Years:', selectedYears.value)
   closeModal()
 }
+
 </script>
 <style scoped>
 /* Scrollbar Styles */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 12px; /* Set width for scrollbar */
+  width: 12px;
+  /* Set width for scrollbar */
   height: 80%;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #e2e8f0; /* Lighter color for the track */
+  background: #e2e8f0;
+  /* Lighter color for the track */
   border-radius: 10px;
   /* No need for width, but ensure the track is thinner */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #0f4c96; /* Dark blue for thumb */
-  border-radius: 10px; /* Rounded thumb */
-  border: 2px solid #ffffff; /* Optional: Thumb border */
+  background-color: #0f4c96;
+  /* Dark blue for thumb */
+  border-radius: 10px;
+  /* Rounded thumb */
+  border: 2px solid #ffffff;
+  /* Optional: Thumb border */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #1e73b3; /* Change thumb color on hover */
+  background-color: #1e73b3;
+  /* Change thumb color on hover */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track-piece {
-  border-radius: 10px; /* To ensure the track itself is rounded */
+  border-radius: 10px;
+  /* To ensure the track itself is rounded */
 }
 </style>

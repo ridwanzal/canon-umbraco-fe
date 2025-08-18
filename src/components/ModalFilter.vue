@@ -75,6 +75,7 @@
 <script setup>
 import { ref } from 'vue'
 
+
 const showModal = ref(true)
 const openAccordion = ref(null)
 const selectedCountries = ref([])

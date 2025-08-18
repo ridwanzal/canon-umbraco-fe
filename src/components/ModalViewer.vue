@@ -1,91 +1,32 @@
 <template>
-  <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-left bg-white pl-[120px] pr-[120px]">
+  <div v-if="showModal" class="fixed inset-0 z-100 flex items-center justify-left bg-white pl-[120px] pr-[120px]">
     <div class="bg-white rounded-lg max-w-4xl w-full p-2">
-      <div class="container bg-gray">
-        <div class="flex justify-end mb-[48px] relative left-[90px]">
-          <button @click="$emit('close')" class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0]">
-            &times;
-          </button>
-        </div>
-        <div class="flex mt-4 mb-10">
-          <div>
-            <div class="text-base text-gray-500 mb-2">
-              <span class="text-[#40464D] mr-2">2025</span>
-              <span class="text-[#40464D]">SINGAPORE</span>
-            </div>
-            <h3 class="text-lg font-bold text-[#0F4C96] text-gray-800 text-[24px]">
-              Think Big Leadership Summit 2025
-            </h3>
-          </div>
-          <div class="ml-auto">
-            <div class="relative min-w-[200px]">
-              <button @click="openCountry = !openCountry"
-                class="w-full border border-[#00aed8] rounded-full px-4 py-2 text-[#000] bg-white focus:outline-none focus:ring-2 focus:ring-[#00aed8] flex items-center justify-between">
-                <span>Media</span>
-                <svg :class="[
-                  'w-4 h-4 text-[#000] transition-transform duration-200 transform',
-                  openCountry ? 'rotate-180' : 'rotate-0',
-                ]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <ul v-if="openCountry" class="absolute w-[80%] left-[10%] bg-white border-[#E7E8E9] mt-1 z-10">
-                <li v-for="option in countryOptions" :key="option.value" @click="selectCountry(option)"
-                  class="px-[16px] py-[4px] border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0">
-                  Media
-                </li>
-              </ul>
+      <div class="container bg-[#F7F5F6]">
+        <div class="flex justify-between items-center">
+          <div class="flex-1 text-left p-[24px]">
+            <div class="flex gap-2">
+              <div>1</div>
+              <div>|</div>
+              <div>37</div>
             </div>
           </div>
-        </div>
-        <div class="grid grid-cols-4 gap-6 max-h-[600px] overflow-y-auto custom-scrollbar">
-          <div class="relative">
-            <img src="/images/1.png" alt="Image 1" class="w-full h-auto">
+          <div class="flex-1 text-center">
+            <div class="flex gap-[20px]">
+              <div class="text-[#00AED8]">
+                2025
+              </div>
+              <div>
+                SINGAPORE
+              </div>
+              <div>
+                Think Big Leadearship Business Series
+              </div>
+            </div>
           </div>
-          <div class="relative">
-            <img src="/images/2.png" alt="Image 2" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/3.png" alt="Image 3" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/4.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/5.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/6.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/7.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/8.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/1.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/2.png" alt="Image 2" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/3.png" alt="Image 3" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/4.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/5.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/6.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/7.png" alt="Image 1" class="w-full h-auto">
-          </div>
-          <div class="relative">
-            <img src="/images/8.png" alt="Image 1" class="w-full h-auto">
+          <div class="flex-1 text-right">
+            <button @click="$emit('close')" class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0]">
+              &times;
+            </button>
           </div>
         </div>
       </div>
