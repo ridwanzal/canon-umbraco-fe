@@ -1,95 +1,114 @@
 <template>
-  <div v-if="showModal" class="fixed inset-0 z-100 flex items-center justify-left bg-white pl-[120px] pr-[120px]">
+  <div
+    v-if="showModal"
+    class="fixed inset-0 z-100 flex items-center justify-left bg-white pl-[120px] pr-[120px]"
+  >
     <div class="bg-white rounded-lg max-w-4xl w-full p-2">
       <div class="container bg-[#F7F5F6]">
+        <!-- Header -->
         <div class="flex justify-between items-center">
-          <div class="flex-1 text-left p-[24px]">
-            <div class="flex gap-2">
-              <div>1</div>
-              <div>|</div>
-              <div>37</div>
-            </div>
+          <div class="flex-1 text-left p-[24px] flex items-center gap-4">
+            <!-- Custom pagination -->
+            <div
+              ref="customPagination"
+              class="text-[#40464D] font-medium"
+            ></div>
           </div>
+
           <div class="flex-1 text-center">
             <div class="flex gap-[20px]">
-              <div class="text-[#40464D]">
-                2025
-              </div>
-              <div class="text-[#40464D]">
-                SINGAPORE
-              </div>
-              <div class="font-bold text-[#0F4C96] ">
-                Think Big Leadearship Business Series
+              <div class="text-[#40464D]">2025</div>
+              <div class="text-[#40464D]">SINGAPORE</div>
+              <div class="font-bold text-[#0F4C96]">
+                Think Big Leadership Business Series
               </div>
             </div>
           </div>
+
           <div class="flex-1 text-right flex-col-reverse">
-            <button @click="$emit('close')" class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] float-right close-lh">
+            <button
+              @click="closeModal"
+              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] float-right close-lh"
+            >
               &times;
             </button>
-            <a href="#" class="cursor-pointer float-right mr-4 mr-[32px]">
-              <svg width="20" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 10.248C6.89267 10.248 6.79333 10.2303 6.702 10.195C6.61067 10.1597 6.52167 10.0983 6.435 10.011L3.815 7.392C3.71767 7.29467 3.667 7.18 3.663 7.048C3.659 6.916 3.70967 6.795 3.815 6.685C3.92567 6.57434 4.04467 6.518 4.172 6.516C4.3 6.514 4.419 6.56834 4.529 6.679L6.5 8.65V0.500007C6.5 0.358007 6.54767 0.239007 6.643 0.143007C6.73833 0.047007 6.85733 -0.00065977 7 6.89653e-06C7.14267 0.000673563 7.26167 0.0483403 7.357 0.143007C7.45233 0.237674 7.5 0.356673 7.5 0.500007V8.65L9.471 6.679C9.56833 6.58167 9.684 6.53067 9.818 6.526C9.952 6.52134 10.074 6.57434 10.184 6.685C10.2907 6.795 10.345 6.913 10.347 7.039C10.349 7.165 10.295 7.28267 10.185 7.392L7.565 10.012C7.47833 10.0987 7.38933 10.1597 7.298 10.195C7.20733 10.2303 7.108 10.248 7 10.248ZM1.616 14C1.15533 14 0.771 13.846 0.463 13.538C0.155 13.23 0.000666667 12.8453 0 12.384V10.461C0 10.319 0.0476668 10.2003 0.143 10.105C0.238333 10.0097 0.357333 9.96167 0.5 9.961C0.642667 9.96034 0.761667 10.0083 0.857 10.105C0.952333 10.2017 1 10.3203 1 10.461V12.384C1 12.538 1.064 12.6793 1.192 12.808C1.32 12.9367 1.461 13.0007 1.615 13H12.385C12.5383 13 12.6793 12.936 12.808 12.808C12.9367 12.68 13.0007 12.5387 13 12.384V10.461C13 10.319 13.0477 10.2003 13.143 10.105C13.2383 10.0097 13.3573 9.96167 13.5 9.961C13.6427 9.96034 13.7617 10.0083 13.857 10.105C13.9523 10.2017 14 10.3203 14 10.461V12.384C14 12.8447 13.846 13.229 13.538 13.537C13.23 13.845 12.8453 13.9993 12.384 14H1.616Z" fill="black"/>
-              </svg>
-            </a>
           </div>
+        </div>
+
+        <!-- Swiper -->
+        <div class="relative px-6 py-6">
+          <Swiper
+            :modules="[Navigation, Pagination]"
+            :navigation="{ prevEl: prevEl, nextEl: nextEl }"
+            :pagination="{
+              el: customPagination,
+              type: 'custom',
+              renderCustom: (swiper, current, total) => {
+                return `${current} | ${total}`;
+              },
+            }"
+            class="h-[400px]"
+          >
+            <SwiperSlide
+              v-for="(slide, i) in 10"
+              :key="i"
+              class="flex items-center justify-center bg-gray-200 rounded-lg overflow-hidden"
+            >
+              <div
+                class="w-auto h-[287px] md:h-[555px] aspect-[16/10] flex items-center justify-center bg-white"
+              >
+                <img
+                  :src="`https://picsum.photos/800/500?random=${i}`"
+                  alt="Slide image"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </SwiperSlide>
+          </Swiper>
+
+          <!-- Custom navigation (absolutely positioned, centered vertically) -->
+          <button
+            ref="prevEl"
+            class="absolute left-0 top-1/2 -translate-y-1/2 text-[#0F4C96] text-3xl font-bold cursor-pointer z-10"
+          >
+            ←
+          </button>
+          <button
+            ref="nextEl"
+            class="absolute right-0 top-1/2 -translate-y-1/2 text-[#0F4C96] text-3xl font-bold cursor-pointer z-10"
+          >
+            →
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation, Pagination } from "swiper/modules";
 
-const showModal = ref(true)
-const openAccordion = ref(null)
-const selectedCountries = ref([])
-const selectedYears = ref([])
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-const toggleAccordion = (section) => {
-  openAccordion.value = openAccordion.value === section ? null : section
-}
+const showModal = ref(true);
+
+// refs for custom elements
+const customPagination = ref(null);
+const prevEl = ref(null);
+const nextEl = ref(null);
 
 const closeModal = () => {
-  showModal.value = false
-}
-
-const applyFilter = () => {
-  console.log('Countries:', selectedCountries.value)
-  console.log('Years:', selectedYears.value)
-  closeModal()
-}
+  showModal.value = false;
+};
 </script>
+
 <style scoped>
-/* Scrollbar Styles */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 12px; /* Set width for scrollbar */
-  height: 80%;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #e2e8f0; /* Lighter color for the track */
-  border-radius: 10px;
-  /* No need for width, but ensure the track is thinner */
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #0f4c96; /* Dark blue for thumb */
-  border-radius: 10px; /* Rounded thumb */
-  border: 2px solid #ffffff; /* Optional: Thumb border */
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #1e73b3; /* Change thumb color on hover */
-}
-
-.custom-scrollbar::-webkit-scrollbar-track-piece {
-  border-radius: 10px; /* To ensure the track itself is rounded */
-}
-
-.close-lh{
-  line-height: 0.2;
+.close-lh {
+  line-height: 0.5;
 }
 </style>
