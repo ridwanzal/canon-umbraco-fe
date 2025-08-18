@@ -62,13 +62,13 @@
           </button>
           <ul
             v-if="openCountry"
-            class="absolute w-[80%] left-[10%] bg-white border border-[#ddd] mt-1 shadow-sm z-10"
+            class="absolute w-[80%] left-[10%] bg-white border-[#E7E8E9] mt-1 shadow-sm z-10"
           >
             <li
               v-for="option in countryOptions"
               :key="option.value"
               @click="selectCountry(option)"
-              class="px-4 py-2 border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0"
+              class="px-[16px] py-[4px] border-b border-[#E7E8E9] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0"
             >
               {{ option.label }}
             </li>
@@ -101,13 +101,13 @@
           </button>
           <ul
             v-if="openYear"
-            class="absolute w-[80%] left-[10%] bg-white border border-[#ddd] mt-1 shadow-sm z-10"
+            class="absolute w-[80%] left-[10%] bg-white border-[#E7E8E9] mt-1 shadow-sm z-10"
           >
             <li
               v-for="option in yearOptions"
               :key="option.value"
               @click="selectYear(option)"
-              class="px-4 py-2 border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0"
+              class="px-[16px] py-[4px] border-b border-[#E7E8E9] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0"
             >
               {{ option.label }}
             </li>

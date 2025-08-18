@@ -34,9 +34,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <ul v-if="openCountry" class="absolute w-[80%] left-[10%] bg-white border border-[#ddd] mt-1 shadow-sm z-10">
+          <ul v-if="openCountry" class="absolute w-[80%] left-[10%] bg-white border-[#E7E8E9] mt-1 z-10">
             <li v-for="option in countryOptions" :key="option.value" @click="selectCountry(option)"
-              class="px-4 py-2 border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0">
+              class="px-[16px] py-[4px] border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0">
               {{ option.label }}
             </li>
           </ul>
@@ -53,9 +53,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <ul v-if="openYear" class="absolute w-[80%] left-[10%] bg-white border border-[#ddd] mt-1 shadow-sm z-10">
+          <ul v-if="openYear" class="absolute w-[80%] left-[10%] bg-white  border-[#E7E8E9] mt-1 shadow-sm z-10">
             <li v-for="option in yearOptions" :key="option.value" @click="selectYear(option)"
-              class="px-4 py-2 border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0">
+              class="px-[16px] py-[4px] border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0">
               {{ option.label }}
             </li>
           </ul>
@@ -67,7 +67,7 @@
       <Swiper ref="swiperRef" :modules="[Navigation, Pagination]" :slides-per-view="1.5" :space-between="16"
         :breakpoints="{ 1024: { slidesPerView: 3 } }" navigation :pagination="paginationOptions"
         class="pb-6 relative gallery--carousel">
-        <SwiperSlide v-for="(car, index) in filteredCars" :key="index">
+        <SwiperSlide v-for="(car, index) in filteredCars" :key="index"  @click="openModalAlbum">
           <GalleryCard :car="car" />
         </SwiperSlide>
       </Swiper>
@@ -79,6 +79,8 @@
 
   <!-- Modal -->
   <ModalFilter v-if="showModal" @close="closeModal" />
+  <ModalAlbum v-if="showModalAlbum" @close="closeModalAlbum" />
+  <ModalViewer v-if="showModalViewer" @close="closeModalViewer" />
 </template>
 
 <script>
@@ -90,9 +92,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ModalFilter from "./ModalFilter.vue";
+import ModalAlbum from "./ModalAlbum.vue";
+import ModalViewer from "./ModalViewer.vue";
 
 export default {
-  components: { Swiper, SwiperSlide, GalleryCard, ModalFilter },
+  components: { Swiper, SwiperSlide, GalleryCard, ModalFilter, ModalAlbum, ModalViewer},
   setup() {
     // dropdown state & options (kept as you already had)
     const openCountry = ref(false);
@@ -100,7 +104,25 @@ export default {
     const selectedCountry = ref("");
     const selectedYear = ref("");
     const swiperRef = ref(null);
-    const showModal = ref(false)
+    const showModal = ref(false);
+    const showModalAlbum = ref(false);
+    const showModalViewer = ref(false);
+
+    const openModalAlbum = () => {
+      showModalAlbum.value = true;
+    };
+
+    const closeModalAlbum = () => {
+      showModalAlbum.value = false;
+    };  
+
+    const openModalViewer = () => {
+      showModalViewer.value = true;
+    };
+
+    const closeModalViewer = () => {
+      showModalViewer.value = false;
+    };
 
     const openModal = () => {
       showModal.value = true
@@ -242,6 +264,12 @@ export default {
       showModal,
       openModal,
       closeModal,
+      showModalAlbum,
+      openModalAlbum,
+      closeModalAlbum,
+      showModalViewer,
+      openModalViewer,
+      closeModalViewer
     };
   },
 };

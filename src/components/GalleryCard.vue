@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <a
-    class="cursor-pointer"
-    href="https://google.com"
-    target="_blank"
-  >
+  <div class="cursor-pointer">
     <div class="relative w-full" style="padding-top: 66.6667%">
       <img
         :src="car.image"
@@ -21,7 +16,6 @@
         {{ car.title }}
       </h3>
     </div>
-  </a>
   </div>
 </template>
 
