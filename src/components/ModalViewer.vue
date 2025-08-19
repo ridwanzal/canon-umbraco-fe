@@ -33,12 +33,18 @@
             </div>
           </div>
 
-          <div class="flex-1 p-[16px] text-right flex-col-reverse">
+          <div class="flex-1 p-[16px] gap-2 text-right flex-col-reverse">
+              <button
+              @click="closeModal"
+              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] float-right close-lh"
+            >
+              <img src="/images/download.png" height="24" alt="close" />
+            </button>
             <button
               @click="closeModal"
               class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] float-right close-lh"
             >
-              &times;
+              <img src="/images/close.png" height="24" alt="close" />
             </button>
           </div>
         </div>
