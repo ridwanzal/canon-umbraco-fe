@@ -6,7 +6,7 @@
     <div class="bg-white rounded-lg max-w-4xl w-full xl:p-2">
       <div class="xl:container bg-[#F7F5F6]">
         <div class="flex justify-between items-center">
-          <div class="flex-1 text-left p-[24px] flex items-center gap-4">
+          <div class="flex-1 text-left p-[16px] flex items-center gap-4">
             <div
               ref="customPagination"
               class="text-[#40464D] font-medium"
@@ -14,7 +14,7 @@
           </div>
 
           <div class="modal-viewer-header desktop">
-            <div class="modal-viewer-header--container gap-[20px]">
+            <div class="modal-viewer-header--container xl:gap-[20px] gap-[8px]">
               <div class="text-[#40464D]">2025</div>
               <div class="text-[#40464D]">SINGAPORE</div>
               <div class="font-bold text-[#0F4C96]">
@@ -24,7 +24,7 @@
           </div>
 
           <div class="modal-viewer-header mobile">
-            <div class="modal-viewer-header--container gap-[20px]">
+            <div class="modal-viewer-header--container xl:gap-[20px] gap-[8px]">
               <div class="text-[#40464D]">2025</div>
               <div class="text-[#40464D]">SINGAPORE</div>
             </div>
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="flex-1 text-right flex-col-reverse">
+          <div class="flex-1 p-[16px] text-right flex-col-reverse">
             <button
               @click="closeModal"
               class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] float-right close-lh"
@@ -44,7 +44,7 @@
         </div>
 
         <!-- Swiper -->
-        <div class="relative xl:px-6 pt-[60px] pb-[81px]">
+        <div class="relative xl:px-6 pt-[60px] pb-[81px] h-full xl:h-[789px]">
           <Swiper
             :modules="[Navigation, Pagination]"
             :navigation="{ prevEl: prevEl, nextEl: nextEl }"
@@ -55,15 +55,15 @@
                 return `${current} | ${total}`;
               },
             }"
-            class="h-[100%]"
+            class=""
           >
             <SwiperSlide
               v-for="(slide, i) in 10"
               :key="i"
-              class="flex items-center justify-center bg-gray-200 overflow-hidden"
+              class="slider-container flex items-center justify-center bg-gray-200 overflow-hidden"
             >
               <div
-                class="w-auto h-[287px] xl:h-[555px] aspect-[16/10] block items-center justify-center bg-white"
+                class="slider-container--image aspect-[16/10] block items-center justify-center"
               >
                 <img
                   :src="`https://picsum.photos/800/500?random=${i}`"
@@ -80,7 +80,7 @@
           </Swiper>
 
           <!-- Custom navigation (absolutely positioned, centered vertically) -->
-          <div class="">
+          <div class="show-flex-desktop">
             <button
               ref="prevEl"
               class="absolute left-0 top-1/2 -translate-y-1/2 text-[#000] text-4xl font-bold cursor-pointer z-10"
@@ -161,6 +161,14 @@ const closeModal = () => {
     justify-content: center;
     text-align: center;
   }
+
+  .slider-container{
+    min-height: 530px !important;
+  }
+
+  .slider-container--image{
+    max-height: 287px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -185,5 +193,13 @@ const closeModal = () => {
   .show-flex-mobile {
     display: none !important;
   }
+  
+  .slider-container--image{
+    max-height: 555px;
+  }
+}
+
+.slider-container{
+  min-height: 769px;
 }
 </style>
