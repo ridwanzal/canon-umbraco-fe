@@ -1,8 +1,8 @@
 <template>
-  <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-left bg-white pl-[120px] pr-[120px]">
+  <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-left bg-white md:pl-[120px] md:pr-[120px]">
     <div class="bg-white rounded-lg max-w-4xl w-full p-2">
       <div class="container">
-        <div class="flex justify-end mb-[48px] relative left-[90px]">
+        <div class="flex justify-end mb-[48px] relative left-0 md:left-[90px]">
           <button @click="$emit('close')" class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0]">
             &times;
           </button>
@@ -17,10 +17,10 @@
               Think Big Leadership Summit 2025
             </h3>
           </div>
-          <div class="ml-auto">
-            <div class="relative min-w-[200px]">
+          <div class="w-full sm:ml-auto sm:w-auto">
+            <div class="relative w-full sm:min-w-[200px]">
               <button @click="openCountry = !openCountry"
-                class="w-full border border-[#00aed8] rounded-full px-4 py-2 text-[#000] bg-white focus:outline-none focus:ring-2 focus:ring-[#00aed8] flex items-center justify-between">
+                class="md:w-auto border border-[#00aed8] rounded-full px-4 py-2 text-[#000] bg-white focus:outline-none focus:ring-2 focus:ring-[#00aed8] flex items-center justify-between">
                 <span>Media</span>
                 <svg :class="[
                   'w-4 h-4 text-[#000] transition-transform duration-200 transform',
@@ -38,53 +38,53 @@
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-4 gap-6 max-h-[600px] overflow-y-auto custom-scrollbar">
-          <div class="relative cursor-pointer" @click="openModalViewer">
+        <div class="custom-grid-viewer overflow-y-auto custom-scrollbar">
+          <div class="relative cursor-pointer self-center" @click="openModalViewer">
             <img src="/images/1.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/2.png" alt="Image 2" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/3.png" alt="Image 3" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/4.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/5.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/6.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/7.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/8.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/1.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/2.png" alt="Image 2" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/3.png" alt="Image 3" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/4.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/5.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/6.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/7.png" alt="Image 1" class="w-full h-auto">
           </div>
-          <div class="relative">
+          <div class="relative cursor-pointer self-center">
             <img src="/images/8.png" alt="Image 1" class="w-full h-auto">
           </div>
         </div>
@@ -156,5 +156,29 @@ const applyFilter = () => {
 .custom-scrollbar::-webkit-scrollbar-track-piece {
   border-radius: 10px;
   /* To ensure the track itself is rounded */
+}
+
+.custom-grid-viewer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem; /* equivalent to Tailwind's gap-6 */
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* 4 columns on desktop (≥ 768px) */
+@media (min-width: 768px) {
+  .custom-grid-viewer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Optional custom scrollbar styles */
+.custom-grid-viewer::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-grid-viewer::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 </style>
