@@ -6,7 +6,7 @@
     <div class="bg-white rounded-lg max-w-4xl w-full xl:p-2">
       <div class="xl:container bg-[#F7F5F6]">
         <div class="flex justify-between items-center">
-          <div class="flex-1 text-left p-[16px] flex items-center gap-4">
+          <div class="flex-1 text-left xl:p-[16px] p-[8px] flex items-center gap-4">
             <div
               ref="customPagination"
               class="text-[#40464D] font-medium"
@@ -33,19 +33,21 @@
             </div>
           </div>
 
-          <div class="flex-1 p-[16px] gap-2 text-right flex-col-reverse">
+          <div class="flex-1 xl:p-[16px] gap-2 text-right flex-col-reverse">
+            <div class="flex gap-6 ml-auto w-full justify-end">
               <button
               @click="closeModal"
-              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] float-right close-lh"
+              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] close-lh"
             >
-              <img src="/images/download.png" height="24" alt="close" />
+              <img src="/images/download.png" height="29" alt="download" />
             </button>
             <button
               @click="closeModal"
-              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] float-right close-lh"
+              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0 close-lh"
             >
               <img src="/images/close.png" height="24" alt="close" />
             </button>
+            </div>
           </div>
         </div>
 
