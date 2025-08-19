@@ -60,7 +60,7 @@
             <SwiperSlide
               v-for="(slide, i) in 10"
               :key="i"
-              class="flex items-center justify-center bg-gray-200 rounded-lg overflow-hidden"
+              class="flex items-center justify-center bg-gray-200 overflow-hidden"
             >
               <div
                 class="w-auto h-[287px] xl:h-[555px] aspect-[16/10] block items-center justify-center bg-white"
@@ -160,6 +160,30 @@ const closeModal = () => {
   .modal-viewer-header.mobile > .modal-viewer-header--container {
     justify-content: center;
     text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-pagination {
+    display: none;
+  }
+
+  .show-flex-desktop {
+    display: none !important;
+  }
+
+  .show-flex-mobile {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .show-flex-desktop {
+    display: flex !important;
+  }
+
+  .show-flex-mobile {
+    display: none !important;
   }
 }
 </style>
