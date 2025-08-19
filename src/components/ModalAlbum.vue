@@ -1,8 +1,8 @@
 <template>
-  <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-left bg-white md:pl-[120px] md:pr-[120px]">
+  <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-left bg-white xl:pl-[120px] xl:pr-[120px]">
     <div class="bg-white rounded-lg max-w-4xl w-full p-2">
       <div class="container">
-        <div class="flex justify-end mb-[48px] relative left-0 md:left-[90px]">
+        <div class="flex justify-end md:mb-[48px] relative left-0 xl:left-[90px]">
           <button @click="$emit('close')" class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0]">
             &times;
           </button>
@@ -13,14 +13,14 @@
               <span class="text-[#40464D] mr-2">2025</span>
               <span class="text-[#40464D]">SINGAPORE</span>
             </div>
-            <h3 class="text-lg font-bold text-[#0F4C96] text-gray-800 text-[24px]">
+            <h3 class="text-lg font-bold text-[#0F4C96] text-gray-800 text-[16px] md:text-[24px]">
               Think Big Leadership Summit 2025
             </h3>
           </div>
-          <div class="w-full sm:ml-auto sm:w-auto">
+          <div class="w-full sm:ml-auto sm:w-auto self-end">
             <div class="relative w-full sm:min-w-[200px]">
               <button @click="openCountry = !openCountry"
-                class="md:w-auto border border-[#00aed8] rounded-full px-4 py-2 text-[#000] bg-white focus:outline-none focus:ring-2 focus:ring-[#00aed8] flex items-center justify-between">
+                class="min-w-[200px] float-right xl:w-auto border border-[#00aed8] rounded-full px-4 py-2 text-[#000] bg-white focus:outline-none focus:ring-2 focus:ring-[#00aed8] flex items-center">
                 <span>Media</span>
                 <svg :class="[
                   'w-4 h-4 text-[#000] transition-transform duration-200 transform',

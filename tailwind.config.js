@@ -1,3 +1,4 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,11 +8,10 @@ export default {
   theme: {
     extend: {},
     screens: {
-      sm: '640px',  // small
-      md: '768px',  // medium
-      lg: '1024px', // large (desktop)
-      xl: '1280px', // extra large
-      '2xl': '1536px',
+      sm: '769px',   // replaces Tailwind sm (mobile → tablet)
+      md: '992px',   // replaces Tailwind md (tablet → desktop)
+      lg: '1200px',  // replaces Tailwind lg (large desktop)
+      xl: '1400px',  // optional, you can keep or remove
     }
   },
   plugins: [
