@@ -7,7 +7,7 @@
         @click="$emit('close')"
         class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0]"
       >
-        &times;
+        <img src="/images/close.png" height="24" alt="close"> 
       </button>
     </div>
 
