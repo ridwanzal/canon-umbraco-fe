@@ -9,7 +9,7 @@
           class="flex justify-end md:mb-[48px] relative left-0 xl:left-[90px]"
         >
           <button
-           @click="handleClose"
+            @click="handleClose"
             class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0]"
           >
             <img src="/images/close.png" height="24" alt="close" />
@@ -62,9 +62,9 @@
                 class="absolute right-[24px] top-[46px] w-[148px] min-w-[148px] bg-white border-[#E7E8E9] z-10"
               >
                 <li
-                  v-for="option in countryOptions"
+                  v-for="option in mediaOptions"
                   :key="option.value"
-                  @click="selectCountry(option)"
+                  @click="selectMedia(option)"
                   class="px-[16px] py-[4px] border-b border-[#ddd] hover:bg-[#00aed8] hover:text-white cursor-pointer last:border-b-0"
                 >
                   {{ option.label }}
@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import ModalViewer from "./ModalViewer.vue";
 
 export default {
@@ -130,25 +130,25 @@ export default {
   components: { ModalViewer },
   emits: ["close"],
   setup(props, { emit }) {
-    const showModal = ref(true);
     const showModalViewer = ref(false);
-    const openMediaopt = ref(false); // <-- renamed
-    const selectedCountry = ref(null);
+    const openMediaopt = ref(false);
     const dropdownRef = ref(null);
 
-    function handleClose() {
-      emit("close"); // 👈 emit to parent
-    }
-
-    const countryOptions = ref([
+    const mediaOptions = ref([
       { value: "All", label: "All" },
       { value: "Photo", label: "Photo" },
       { value: "Video", label: "Video" },
     ]);
 
-    const closeModal = () => {
-      showModal.value = false;
-    };
+    const selectedMedia = ref("All");
+
+    const mediaLabel = computed(() => {
+      return mediaOptions.value.find((o) => o.value === selectedMedia.value)?.label || "Media";
+    });
+
+    function handleClose() {
+      emit("close");
+    }
 
     const openModalViewer = () => {
       showModalViewer.value = true;
@@ -158,8 +158,8 @@ export default {
       showModalViewer.value = false;
     };
 
-    const selectCountry = (option) => {
-      selectedCountry.value = option.value;
+    const selectMedia = (option) => {
+      selectedMedia.value = option.value;
       openMediaopt.value = false;
     };
 
@@ -174,27 +174,28 @@ export default {
     };
 
     onMounted(() => {
-      document.addEventListener("click", handleClickOutside);
+      document.addEventListener("click", handleClickOutside, true);
     });
 
     onBeforeUnmount(() => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside, true);
     });
 
     return {
       showModalViewer,
-      openMediaopt, // <-- renamed
-      countryOptions,
-      selectedCountry,
-      closeModal,
+      openMediaopt,
+      mediaOptions,
+      selectedMedia,
+      mediaLabel,
       openModalViewer,
       closeModalViewer,
-      selectCountry,
+      selectMedia,
       dropdownRef,
-      handleClose
+      handleClose,
     };
   },
 };
+
 </script>
 
 <style scoped>
