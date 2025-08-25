@@ -199,8 +199,12 @@ export default {
 
     const closeModalAlbum = () => {
       showModalAlbum.value = false;
+      nextTick(() => {
+        if (swiperRef.value && swiperRef.value.swiper) {
+          swiperRef.value.swiper.update();
+        }
+      });
     };
-
     const openModalViewer = () => {
       showModalViewer.value = true;
     };

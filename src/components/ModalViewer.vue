@@ -2,15 +2,14 @@
   <div
     v-if="showModal"
     class="fixed inset-0 z-100 flex items-center justify-left bg-white xl:pl-[120px] xl:pr-[120px]"
+    @click="handleClose"
   >
-    <div class="bg-white rounded-lg max-w-4xl w-full xl:p-2">
+    <div class="bg-white rounded-lg max-w-4xl w-full xl:p-2" @click.stop>
       <div class="xl:container bg-[#F7F5F6]">
         <div class="flex justify-between items-center">
+          <!-- Header -->
           <div class="flex-1 text-left xl:p-[16px] p-[8px] flex items-center gap-4">
-            <div
-              ref="customPagination"
-              class="text-[#40464D] font-medium"
-            ></div>
+            <div ref="customPagination" class="text-[#40464D] font-medium"></div>
           </div>
 
           <div class="modal-viewer-header desktop">
@@ -23,30 +22,18 @@
             </div>
           </div>
 
-          <div class="modal-viewer-header mobile">
-            <div class="modal-viewer-header--container xl:gap-[20px] gap-[8px]">
-              <div class="text-[#40464D]">2025</div>
-              <div class="text-[#40464D]">SINGAPORE</div>
-            </div>
-            <div class="font-bold text-[#0F4C96]">
-              Think Big Leadership Business Series
-            </div>
-          </div>
-
+          <!-- Close + Download -->
           <div class="flex-1 xl:p-[16px] gap-2 text-right flex-col-reverse">
             <div class="flex gap-6 ml-auto w-full justify-end">
+              <button class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] close-lh">
+                <img src="/images/download.png" height="29" alt="download" />
+              </button>
               <button
-              @click="closeModal"
-              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] close-lh"
-            >
-              <img src="/images/download.png" height="29" alt="download" />
-            </button>
-            <button
-              @click="closeModal"
-              class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0 close-lh"
-            >
-              <img src="/images/close.png" height="24" alt="close" />
-            </button>
+                @click="handleClose"
+                class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0] close-lh"
+              >
+                <img src="/images/close.png" height="24" alt="close" />
+              </button>
             </div>
           </div>
         </div>
@@ -63,31 +50,26 @@
                 return `${current} | ${total}`;
               },
             }"
-            class=""
           >
             <SwiperSlide
               v-for="(slide, i) in 10"
               :key="i"
               class="slider-container flex items-center justify-center bg-gray-200 overflow-hidden"
             >
-              <div
-                class="slider-container--image aspect-[16/10] block items-center justify-center"
-              >
+              <div class="slider-container--image aspect-[16/10]">
                 <img
                   :src="`https://picsum.photos/800/500?random=${i}`"
                   alt="Slide image"
                   class="w-full h-full object-cover mb-4"
                 />
                 <p class="text-center">
-                  Ut quis mauris id augue cursus dictum id et diam estibulum
-                  ante ipsum primis in faucibus.
+                  Ut quis mauris id augue cursus dictum id et diam estibulum ante ipsum primis in faucibus.
                 </p>
               </div>
-              <br />
             </SwiperSlide>
           </Swiper>
 
-          <!-- Custom navigation (absolutely positioned, centered vertically) -->
+          <!-- Navigation -->
           <div class="show-flex-desktop">
             <button
               ref="prevEl"
@@ -108,7 +90,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
@@ -117,97 +99,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const showModal = ref(true);
+export default {
+  name: "ModalViewer",
+  emits: ["close"],
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup(props, { emit }) {
+    const showModal = ref(true);
+    const customPagination = ref(null);
+    const prevEl = ref(null);
+    const nextEl = ref(null);
 
-const customPagination = ref(null);
-const prevEl = ref(null);
-const nextEl = ref(null);
+    // When user clicks close or outside
+    const handleClose = () => {
+      showModal.value = false;
+      emit("close"); // 👈 notify parent
+    };
 
-const closeModal = () => {
-  showModal.value = false;
+    return {
+      showModal,
+      customPagination,
+      prevEl,
+      nextEl,
+      handleClose,
+      Navigation,
+      Pagination,
+    };
+  },
 };
 </script>
-
-<style scoped>
-.close-lh {
-  line-height: 0.5;
-}
-
-.modal-viewer-header {
-  display: flex;
-  gap: 12px;
-}
-
-.modal-viewer-header--container {
-  display: flex;
-}
-
-.modal-viewer-header.desktop {
-  display: block;
-}
-
-.modal-viewer-header.mobile {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .modal-viewer-header.desktop {
-    display: none;
-  }
-
-  .modal-viewer-header.mobile {
-    display: block;
-  }
-
-  .modal-viewer-header.mobile div:last-child {
-    display: block;
-    text-align: center;
-    justify-content: center;
-  }
-
-  .modal-viewer-header.mobile > .modal-viewer-header--container {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .slider-container{
-    min-height: 530px !important;
-  }
-
-  .slider-container--image{
-    max-height: 287px;
-  }
-}
-
-@media (max-width: 767px) {
-  .custom-pagination {
-    display: none;
-  }
-
-  .show-flex-desktop {
-    display: none !important;
-  }
-
-  .show-flex-mobile {
-    display: flex !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .show-flex-desktop {
-    display: flex !important;
-  }
-
-  .show-flex-mobile {
-    display: none !important;
-  }
-  
-  .slider-container--image{
-    max-height: 555px;
-  }
-}
-
-.slider-container{
-  min-height: 769px;
-}
-</style>

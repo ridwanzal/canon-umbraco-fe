@@ -1,15 +1,15 @@
 <template>
   <div
-    v-if="showModal"
     class="fixed inset-0 z-50 flex items-center justify-left bg-white xl:pl-[120px] xl:pr-[120px]"
+    @click="handleClose"
   >
-    <div class="bg-white rounded-lg max-w-4xl w-full p-2">
+    <div class="bg-white rounded-lg max-w-4xl w-full p-2" @click.stop>
       <div class="container">
         <div
           class="flex justify-end md:mb-[48px] relative left-0 xl:left-[90px]"
         >
           <button
-            @click="closeModal"
+           @click="handleClose"
             class="text-gray-600 hover:text-gray-900 text-[45px] leading-[0]"
           >
             <img src="/images/close.png" height="24" alt="close" />
@@ -126,14 +126,19 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 import ModalViewer from "./ModalViewer.vue";
 
 export default {
-  name: "CustomModal",
+  name: "ModalAlbum",
   components: { ModalViewer },
-  setup() {
+  emits: ["close"],
+  setup(props, { emit }) {
     const showModal = ref(true);
     const showModalViewer = ref(false);
     const openMediaopt = ref(false); // <-- renamed
     const selectedCountry = ref(null);
     const dropdownRef = ref(null);
+
+    function handleClose() {
+      emit("close"); // 👈 emit to parent
+    }
 
     const countryOptions = ref([
       { value: "All", label: "All" },
@@ -177,7 +182,6 @@ export default {
     });
 
     return {
-      showModal,
       showModalViewer,
       openMediaopt, // <-- renamed
       countryOptions,
@@ -187,6 +191,7 @@ export default {
       closeModalViewer,
       selectCountry,
       dropdownRef,
+      handleClose
     };
   },
 };
